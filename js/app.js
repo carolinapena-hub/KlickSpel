@@ -7,6 +7,8 @@ const scoreElement = document.getElementById('score');
 const button = document.getElementById('Klickaknapp');
 const timeElement = document.getElementById('time');
 const finalscoreElement = document.getElementById('finalScore');
+const nameElement = document.getElementById('name');
+}
 
 const timer = setInterval(() => { // Timer
   timeLeft--;
