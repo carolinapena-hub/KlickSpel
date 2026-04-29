@@ -1,4 +1,11 @@
 // Variabler
 let score=0;
 
+const scoreElement = document.getElementById('score');
+const button = document.getElementById(`Klickaknapp`);
+
+button.addEventListener('click', function(){
+  score+=1;
+  scoreElement.textContent=score;
+})
 
