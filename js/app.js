@@ -1,10 +1,12 @@
 // Variabler
 let score=0;
 let timeLeft=60;
+let gameActive = true;
 
 const scoreElement = document.getElementById('score');
-const button = document.getElementById(`Klickaknapp`);
+const button = document.getElementById('Klickaknapp');
 const timeElement = document.getElementById('time');
+const finalscoreElement = document.getElementById('finalScore');
 
 const timer = setInterval(() => { // Timer
   timeLeft--;
@@ -14,19 +16,14 @@ const timer = setInterval(() => { // Timer
     clearInterval(timer);
     gameActive = false;
     button.disabled = true;
+    finalscoreElement.textContent =`Slutpoäng:` + score;
   }
 }, 1000);
 
-button.addEventListener('click', (e) => {
-  if (gameActive) return;
+button.addEventListener('click', () => {
+  if (!gameActive) return;
   score++;
   scoreElement.textContent = score;
 });
 
-
-
-button.addEventListener('click', function(){
-  score+=1; // Knapp tickar med ett för varje klick
-  scoreElement.textContent=score;
-})
 
