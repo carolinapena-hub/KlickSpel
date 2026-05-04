@@ -13,12 +13,12 @@ const messageElement = document.getElementById('message');
 const postButton = document.getElementById('postScore');
 
 //Starta + klick
-button.addEventListener('click', function(){
+button.addEventListener('click', function() {
 
   if (!gameActive) {
     gameActive = true;
 
-    timer= setInterval(function(){
+    timer = setInterval(function () {
       timeLeft--;
       timeElement.textContent = timeLeft;
 
@@ -26,7 +26,7 @@ button.addEventListener('click', function(){
         clearInterval(timer);
         gameActive = false;
         button.disabled = true;
-        finalscoreElement.textContent = "Slutpoäng:"+ score;
+        finalscoreElement.textContent = "Slutpoäng:" + score;
         postButton.disabled = false;
       }
     }, 1000);
@@ -37,17 +37,25 @@ button.addEventListener('click', function(){
     score++;
     scoreElement.textContent = score;
   }
+});
 
 // Skickar resultat med knapp
-postButton.addEventListener('click', function (){
-  const name = nameElement.value || "Gäst";
-  const scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
 
-  scoreboard.push({name: name, score: score });
-  localStorage.setItem("scoreboard", JSON.stringify(scoreboard));
+async function submitHighScore() {
+  await fetch("https://webhook.site/311a07cb-9c1e-4bba-8266-f5bbcbcf07a7", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name: nameElement.value || "Gäst",
+      score: score
+    })
+  });
 
-messageElement.textContent = "Resultat skickades!";
-postButton.disabled = true;
-})
+  messageElement.textContent = "Resultat skickades!";
+  postButton.disabled = true;
+}
+
 
 
